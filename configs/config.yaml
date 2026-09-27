@@ -1,0 +1,98 @@
+# =============================================================================
+# Bosch Rexroth hydraulic predictive maintenance: pipeline configuration
+# Every threshold and rule used by Stage 2 lives here, so it is versioned with
+# the code and can be reviewed by engineering without reading Python.
+# =============================================================================
+
+paths:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  quarantine_dir: data/quarantine
+  reports_dir: reports
+
+files:
+  telemetry: sensor_telemetry.csv
+  failures: failure_labels.csv
+  maintenance: maintenance_log.csv
+
+# Column renames needed to map the delivered files to the data contract (EDA §3)
+contract_renames:
+  failures: {failure_event_id: event_id}
+  maintenance: {maintenance_id: action_id}
+
+sensors: [pressure_bar, temp_celsius, flow_lpm, vibration_x_g, vibration_y_g, pump_rpm]
+
+# Columns that are labels or derived from labels. They must never be model inputs (EDA §6.1).
+leakage_columns: [is_anomaly, failure_mode, rul_hours]
+
+validation:
+  sampling_interval: 1min
+  machine_id_pattern: '^HPU_\d{2}$'
+  failure_modes: [pump_wear, valve_leakage, contamination, cylinder_drift]
+  # The contract lists Preventive/Reactive/Predictive. 'Inspection' occurs in the data (EDA §3) and is accepted.
+  action_types: [Preventive, Reactive, Predictive, Inspection]
+  components: [Pump, Valve, Filter, Seal, Oil, None]
+  shifts: [Day, Night, Weekend]
+  # Lowest value the sensor reports; a large share of readings exactly at the floor means clipping (DQ-10)
+  sensor_floor: {vibration_x_g: 0.05, vibration_y_g: 0.05}
+
+cleaning:
+  # Engineering plausibility bounds (EDA §4.3). To be signed off by a Rexroth hydraulics engineer.
+  # Values outside are physically impossible and are set to NaN, never clipped.
+  valid_ranges:
+    pressure_bar: [0, 350]
+    temp_celsius: [10, 90]
+    flow_lpm: [0, 150]
+    vibration_x_g: [0, 16]
+    vibration_y_g: [0, 16]
+    pump_rpm: [500, 1600]        # 1000 rpm is a real standby speed (EDA §4.4), so it stays valid
+  max_interpolation_gap_min: 15   # gaps up to this length are interpolated per machine; longer gaps stay NaN
+
+regimes:
+  # Standby is detected from pump speed rather than hard-coded dates, so it generalises to new standby days.
+  standby_rpm_below: 1200
+  day_shift_hours: [8, 20]        # Day = 08:00–19:59 on weekdays (EDA §5)
+  weekend_days: [5, 6]            # Monday = 0
+  midnight_dip_hours: [0]         # daily low-load hour (EDA §7.2)
+
+baseline:
+  # Each machine's "normal" is learned from its own first N days (a commissioning window),
+  # per day type × hour of day. No labelled degradation starts before 21 Jan, so 14 days is clean.
+  reference_days: 14
+  min_samples_per_cell: 20
+  signals: [pressure_bar, temp_celsius, flow_lpm, vibration_x_g, vibration_y_g]
+
+targets:
+  rul_cap_hours: 336              # 14 days = longest degradation window (EDA §6.3)
+  warning_horizon_hours: 168      # binary target: "fails within the next 7 days"
+
+features:
+  grain: 1h                       # feature rows are hourly; each row uses minutes [T-1h, T)
+  rolling_windows_h: [6, 24, 72]
+  lags_h: [1, 24]
+  spectral_window_min: 360        # trailing 6 h of minute-level vibration for the FFT
+  spectral_bands: [[0.0, 0.05], [0.05, 0.15], [0.15, 0.5]]   # cycles per minute
+  vibration_burst_g: 1.0          # a minute above this counts as a burst (healthy p99 ≈ 0.6 g)
+  xy_divergence_g: 0.02
+  corr_prune_threshold: 0.98
+  # Excluded inputs (prefix match):
+  #  - machine_id, pump_rpm: identity leak (EDA §9.2); rpm is used only to detect standby
+  #  - vibration minima: vibration is floor-clipped at 0.05 g (24% of readings, DQ-10), so the hourly
+  #    minimum is the floor, and its z-score is a machine-specific constant that identifies the machine
+  exclude_from_model: [machine_id, pump_rpm, vibration_x_g_min, vibration_y_g_min, z_vibration_x_g_min, z_vibration_y_g_min]
+  # Maintenance features are built but not used: the log ends before telemetry starts (DQ-08), so
+  # "days since maintenance" only grows with the calendar and mostly encodes machine identity.
+  # Re-enable once 2024 CMMS records are available.
+  exclude_groups: [maintenance]
+
+leakage_check:
+  # Train on healthy hours before this date, test after. Predicting machine_id well = identity leak.
+  split_date: '2024-01-21'
+  single_feature_flag_accuracy: 0.30    # chance level with 10 machines is 0.10
+
+splits:
+  strategy: leave_one_machine_out
+  time_holdout_start: '2024-02-15'      # optional secondary check: train before, test after
+
+random_state: 42

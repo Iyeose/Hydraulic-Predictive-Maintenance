@@ -1,0 +1,12 @@
+# Data is never committed: raw files come from the data lake, derived files are rebuilt by the pipeline
+data/raw/*
+data/interim/*
+data/processed/*
+data/quarantine/*
+!data/**/.gitkeep
+reports/figures/*.png
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/

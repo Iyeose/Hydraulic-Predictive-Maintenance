@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdm"
+version = "0.2.0"
+description = "Predictive maintenance for Bosch Rexroth hydraulic power units: data validation, feature engineering and modelling"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "pyarrow>=14",
+  "pyyaml>=6",
+  "pandera>=0.20",
+  "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "matplotlib>=3.7", "seaborn>=0.13"]
+
+[project.scripts]
+pdm-pipeline = "pdm.pipeline:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

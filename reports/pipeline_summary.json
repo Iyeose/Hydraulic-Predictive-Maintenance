@@ -1,0 +1,51 @@
+{
+  "validation_passed": true,
+  "cleaning": {
+    "rows_in": 864000,
+    "rows_added_by_reindex": 0,
+    "missing_values_before": 15540,
+    "values_invalidated": {
+      "pressure_bar": 250,
+      "temp_celsius": 170,
+      "flow_lpm": 0,
+      "vibration_x_g": 0,
+      "vibration_y_g": 0,
+      "pump_rpm": 0
+    },
+    "rows_imputed": 3008,
+    "missing_values_after": 12,
+    "regime_minutes": {
+      "Night": 309600,
+      "Day": 309600,
+      "Weekend": 230400,
+      "Standby": 14400
+    },
+    "standby_days": [
+      "2024-01-15"
+    ],
+    "regime_vs_source_shift_agreement": 1.0,
+    "rows_out": 864000
+  },
+  "dataset_rows": 14400,
+  "eligible_rows": 10688,
+  "candidate_features": 246,
+  "selected_features": 171,
+  "screening": {
+    "kept": 171,
+    "dropped_correlated": 61,
+    "excluded_by_config": 11,
+    "dropped_constant": 1
+  },
+  "identity_accuracy_chance_level": 0.13,
+  "identity_accuracy_raw_features": 0.915,
+  "identity_accuracy_selected_features": 0.414,
+  "label_counts_eligible": {
+    "healthy": 8576,
+    "pump_wear": 960,
+    "valve_leakage": 720,
+    "contamination": 240,
+    "cylinder_drift": 192
+  },
+  "rul_known_eligible": 8080,
+  "runtime_s": 49.1
+}

@@ -1,0 +1,168 @@
+{
+  "created_utc": "2026-09-27T18:07:11+00:00",
+  "rows_in": {
+    "telemetry": 864000,
+    "failures": 9,
+    "maintenance": 51
+  },
+  "rows_out": {
+    "telemetry": 864000,
+    "failures": 9,
+    "maintenance": 51
+  },
+  "results": [
+    {
+      "table": "telemetry",
+      "check": "unique (machine_id, timestamp)",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "contract schema",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "pressure_bar within [0, 350]",
+      "severity": "warning",
+      "n_failed": 250,
+      "action": "set NaN in cleaning",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "temp_celsius within [10, 90]",
+      "severity": "warning",
+      "n_failed": 170,
+      "action": "set NaN in cleaning",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "flow_lpm within [0, 150]",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "vibration_x_g within [0, 16]",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "vibration_y_g within [0, 16]",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "pump_rpm within [500, 1600]",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "telemetry",
+      "check": "vibration_x_g readings exactly at sensor floor 0.05",
+      "severity": "warning",
+      "n_failed": 206697,
+      "action": "keep; exclude floor-driven minima from features",
+      "detail": "23.9% of rows"
+    },
+    {
+      "table": "telemetry",
+      "check": "vibration_y_g readings exactly at sensor floor 0.05",
+      "severity": "warning",
+      "n_failed": 209734,
+      "action": "keep; exclude floor-driven minima from features",
+      "detail": "24.3% of rows"
+    },
+    {
+      "table": "telemetry",
+      "check": "missing sensors \u21d4 dropout flag",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": "2,590 dropout rows"
+    },
+    {
+      "table": "telemetry",
+      "check": "regular 1min grid",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": "0 off-grid timestamps"
+    },
+    {
+      "table": "telemetry",
+      "check": "label columns present in telemetry",
+      "severity": "info",
+      "n_failed": 3,
+      "action": "excluded from features",
+      "detail": "is_anomaly, failure_mode, rul_hours"
+    },
+    {
+      "table": "failures",
+      "check": "contract schema",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "maintenance",
+      "check": "contract schema",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "failures",
+      "check": "machine_id exists in telemetry",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "maintenance",
+      "check": "machine_id exists in telemetry",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "pass",
+      "detail": ""
+    },
+    {
+      "table": "failures",
+      "check": "events inside telemetry period",
+      "severity": "info",
+      "n_failed": 0,
+      "action": "report only",
+      "detail": "9 of 9 inside 2024-01-01\u20132024-02-29"
+    },
+    {
+      "table": "maintenance",
+      "check": "events inside telemetry period",
+      "severity": "warning",
+      "n_failed": 51,
+      "action": "report only",
+      "detail": "0 of 51 inside 2024-01-01\u20132024-02-29"
+    }
+  ],
+  "passed": true
+}
