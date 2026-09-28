@@ -1,0 +1,11 @@
+row,rank,feature,value,shap,description
+754,1,z_pressure_bar_mean_roll24h_std,0.29265673021833344,2.1569577301684264,trailing 24 h std of z_pressure_bar_mean
+754,2,fz_pressure_bar_mean,-0.7321861036240478,2.083933902190152,z_pressure_bar_mean minus the fleet median at the same hour
+754,3,z_pressure_bar_mean_lag1h,-0.7770071807264302,0.6309557964034839,z_pressure_bar_mean 1 h earlier
+754,4,pct_pressure_minus_flow_mean_roll72h_std,0.3811803537140034,-0.3014236230534812,trailing 72 h std of pct_pressure_minus_flow_mean
+754,5,z_pressure_bar_mean_roll6h_std,0.24832646521288898,0.2425573945587493,trailing 6 h std of z_pressure_bar_mean
+754,6,z_pressure_bar_mean_roll6h_max,-0.08662559758032627,0.23158821375322952,trailing 6 h max of z_pressure_bar_mean
+754,7,z_pressure_bar_mean_roll72h_std,0.22826706632751326,-0.20193644686054785,trailing 72 h std of z_pressure_bar_mean
+754,8,z_pressure_bar_max,2.2251251669875542,-0.1787155510775439,hourly max of pressure_bar z-score vs own same-hour healthy baseline
+754,9,z_pressure_bar_mean_roll24h_max,0.24356418863204352,-0.1367026074952577,trailing 24 h max of z_pressure_bar_mean
+754,10,z_vibration_x_g_mean_roll72h_mean,0.32189422564424114,-0.1320544548893556,trailing 72 h mean of z_vibration_x_g_mean

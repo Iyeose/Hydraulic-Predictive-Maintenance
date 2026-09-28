@@ -87,7 +87,22 @@ def rul_rows(ds: pd.DataFrame) -> pd.Series:
 
 
 def warning_rows(ds: pd.DataFrame) -> pd.Series:
+    """Rows scored for early warning: eligible with a known 7-day target."""
     return ds["eligible"] & ds["fail_within_h"].notna()
+
+
+def early_degradation(ds: pd.DataFrame) -> pd.Series:
+    """Degradation hours more than the horizon before failure: target 0, but the machine is not healthy."""
+    return ds["is_degrading"] & ds["fail_within_h"].eq(0).fillna(False)
+
+
+def warning_train_rows(ds: pd.DataFrame) -> pd.Series:
+    """Rows the early-warning model is fitted and calibrated on.
+
+    Early-degradation hours are left out: labelling them "will not fail within 7 days" would teach
+    the model to ignore a genuine, early degradation signal, and they are not false alarms either.
+    """
+    return warning_rows(ds) & ~early_degradation(ds)
 
 
 def fold_split(ds: pd.DataFrame, mask: pd.Series, test_machine: str) -> tuple[np.ndarray, np.ndarray]:

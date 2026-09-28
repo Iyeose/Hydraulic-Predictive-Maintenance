@@ -23,7 +23,7 @@ import pandas as pd
 
 from .config import load_config
 from .models import cv
-from .models.data import check_features, classification_rows, load_model_data, rul_rows, warning_rows
+from .models.data import check_features, classification_rows, load_model_data, rul_rows, warning_train_rows
 
 TASKS = ("failure_mode", "rul", "early_warning")
 CANDIDATES = {
@@ -176,7 +176,7 @@ def run(cfg: dict, tasks=TASKS, models: list[str] | None = None, data_label: str
                     est = make_regressor(base, cfg["modelling"]["models"].get(base, {}), seed).fit(ds.loc[m, X], ds.loc[m, "rul_hours"])
                     model = PdMModel(task, est, X, rul_cap=float(cfg["targets"]["rul_cap_hours"]))
                 else:
-                    m = warning_rows(ds)
+                    m = warning_train_rows(ds)
                     est = make_classifier(base, cfg["modelling"]["models"].get(base, {}), seed, balanced=False).fit(
                         ds.loc[m, X], ds.loc[m, "fail_within_h"].astype(int))
                     fin = results[best].final

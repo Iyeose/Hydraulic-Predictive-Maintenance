@@ -6,6 +6,11 @@
 * Early warning: hourly precision / recall, the realised false-alarm rate, and the warning
   **lead time** per failure event at a fixed false-alarm rate.
 
+A **false alarm** is an alarm while the machine is healthy: ``fail_within_h == 0`` *and* outside
+every labelled degradation window. Degradation hours more than 7 days before a failure (pump wear
+and valve leakage windows are 10–14 days long) have ``fail_within_h == 0`` but an alarm there is a
+correct *early* detection, so it is neither a false alarm nor a missed warning ("early" hours).
+
 Alarm logic is shared by the rule baseline and the ML models: a score above the threshold only
 becomes an alarm after ``persistence`` consecutive hours, and never during standby or repair.
 """
@@ -14,7 +19,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 from sklearn.metrics import (average_precision_score, brier_score_loss, confusion_matrix, f1_score,
-                             mean_absolute_error, precision_score, recall_score, roc_auc_score)
+                             mean_absolute_error, recall_score, roc_auc_score)
 
 
 # --- RUL ------------------------------------------------------------------------------------------
@@ -104,13 +109,19 @@ def alarms_from_scores(scores, groups, active, threshold: float, persistence: in
     return sustained(above, groups, persistence)
 
 
-def false_alarm_rate(alarm, y, scored) -> float:
-    """Share of scored negative hours (fail_within_h == 0) that are in alarm."""
+def healthy_negatives(y, scored, early=None) -> np.ndarray:
+    """Scored hours on which an alarm is false: target 0 and not an early-degradation hour."""
     neg = np.asarray(scored, bool) & (np.asarray(y, float) == 0)
+    return neg & ~np.asarray(early, bool) if early is not None else neg
+
+
+def false_alarm_rate(alarm, y, scored, early=None) -> float:
+    """Share of healthy scored hours (see module docstring) that are in alarm."""
+    neg = healthy_negatives(y, scored, early)
     return float(np.asarray(alarm, bool)[neg].mean()) if neg.any() else float("nan")
 
 
-def threshold_for_far(scores, y, groups, active, scored, target: float, persistence: int) -> float:
+def threshold_for_far(scores, y, groups, active, scored, target: float, persistence: int, early=None) -> float:
     """Lowest threshold whose false-alarm rate is ≤ ``target``.
 
     FAR is non-increasing in the threshold (a higher threshold gives a subset of alarms, also after
@@ -120,7 +131,7 @@ def threshold_for_far(scores, y, groups, active, scored, target: float, persiste
     cand = np.unique(s[np.asarray(active, bool) & ~np.isnan(s)])
     if len(cand) == 0:
         return float("inf")
-    far = lambda t: false_alarm_rate(alarms_from_scores(s, groups, active, t, persistence), y, scored)  # noqa: E731
+    far = lambda t: false_alarm_rate(alarms_from_scores(s, groups, active, t, persistence), y, scored, early)  # noqa: E731
     lo, hi = 0, len(cand) - 1
     if far(cand[hi]) > target:          # even the highest score alarms too often
         return float(np.nextafter(cand[hi], np.inf))
@@ -160,24 +171,33 @@ def alarm_episodes(alarm, groups) -> int:
 
 
 def warning_metrics(frame: pd.DataFrame, events: pd.DataFrame, horizon_h: float) -> tuple[dict, pd.DataFrame]:
-    """Operating-point metrics. ``frame``: machine_id, timestamp, y (fail_within_h), scored (bool), alarm, score."""
+    """Operating-point metrics.
+
+    ``frame``: machine_id, timestamp, y (fail_within_h), scored (bool), alarm, score, and optionally
+    early (bool, degradation hour with y == 0). Recall is over y == 1 hours; precision counts an
+    alarm-hour as correct when y == 1 or it is an early-degradation hour.
+    """
     sc = frame["scored"].to_numpy(bool)
+    early_all = frame["early"].to_numpy(bool) if "early" in frame else np.zeros(len(frame), bool)
     y = frame["y"].to_numpy(float)[sc]
     a = frame["alarm"].to_numpy(bool)[sc]
-    neg_frame = frame[frame["scored"] & (frame["y"] == 0)]
+    early = early_all[sc]
+    neg_frame = frame[healthy_negatives(frame["y"], frame["scored"], early_all)]
     lt = lead_times(frame, events, horizon_h)
     out = {
-        "precision": float(precision_score(y, a, zero_division=0)),
+        "precision": float(((y == 1) | early)[a].mean()) if a.any() else 0.0,
         "recall": float(recall_score(y, a, zero_division=0)),
-        "false_alarm_rate": false_alarm_rate(frame["alarm"], frame["y"], frame["scored"]),
+        "false_alarm_rate": false_alarm_rate(frame["alarm"], frame["y"], frame["scored"], early_all),
+        "early_hours_in_alarm": float(a[early].mean()) if early.any() else float("nan"),
         "false_alarm_episodes_per_1000h": 1000 * alarm_episodes(neg_frame["alarm"], neg_frame["machine_id"]) / max(len(neg_frame), 1),
         "events_detected": int(lt["detected"].sum()) if len(lt) else 0,
         "events_total": int(len(lt)),
         "lead_time_median_h": float(lt["lead_time_h"].median()) if len(lt) else float("nan"),
         "lead_time_mean_h": float(lt["lead_time_h"].mean()) if len(lt) else float("nan"),
     }
-    s = frame["score"].to_numpy(float)[sc]
-    if len(np.unique(y)) == 2 and len(np.unique(s)) > 2:           # ranking metrics only for real scores
+    s = frame["score"].to_numpy(float)[sc & ~early_all]           # ranking metrics on unambiguous hours only
+    y = frame["y"].to_numpy(float)[sc & ~early_all]
+    if len(np.unique(y)) == 2 and len(np.unique(s)) > 2:           # ... and only for real scores
         out["roc_auc"] = float(roc_auc_score(y, s))
         out["pr_auc"] = float(average_precision_score(y, s))
         if np.nanmin(s) >= 0 and np.nanmax(s) <= 1:

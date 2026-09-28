@@ -104,6 +104,31 @@ def test_lead_time_ignores_alarms_before_the_warning_window():
     assert lt.loc[0, "lead_time_h"] == 48.0 and lt.loc[0, "window_h"] == 168.0
 
 
+def test_alarm_on_early_degradation_is_not_a_false_alarm():
+    # hours: 0-1 healthy, 2-3 degrading but > 7 days before failure (target 0), 4-5 within 7 days
+    y = np.array([0, 0, 0, 0, 1, 1], float)
+    early = np.array([0, 0, 1, 1, 0, 0], bool)
+    alarm = np.array([0, 0, 1, 1, 1, 1], bool)
+    scored = np.ones(6, bool)
+    assert false_alarm_rate(alarm, y, scored, early) == 0.0          # early detection is not a false alarm
+    assert false_alarm_rate(alarm, y, scored) == 0.5                 # the naive definition would call it one
+    frame = pd.DataFrame({"machine_id": "A", "timestamp": pd.date_range("2024-01-01", periods=6, freq="1h"),
+                          "y": y, "scored": scored, "early": early, "alarm": alarm, "score": alarm.astype(float)})
+    from pdm.models.metrics import warning_metrics
+    m, _ = warning_metrics(frame, pd.DataFrame(columns=["event_id", "machine_id", "failure_mode", "failure_timestamp",
+                                                        "degradation_start_timestamp"]), 168)
+    assert m["precision"] == 1.0 and m["false_alarm_rate"] == 0.0
+
+
+def test_warning_training_rows_exclude_early_degradation():
+    from pdm.models.data import early_degradation, warning_rows, warning_train_rows
+    ds = make_hourly(window=200).ds                                    # 200 h windows > 168 h horizon
+    early = early_degradation(ds)
+    assert early.sum() > 0
+    assert not (warning_train_rows(ds) & early).any()
+    assert (warning_rows(ds) & early).sum() == (early & ds["eligible"]).sum()
+
+
 # --- baselines and data guards ---------------------------------------------------------------------
 def test_rule_baseline_alarms_after_window_and_persistence_and_maps_mode(mdata, mcfg):
     rb = mcfg["modelling"]["rule_baseline"]

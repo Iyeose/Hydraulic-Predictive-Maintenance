@@ -43,7 +43,7 @@ bosch_rexroth_pdm/
 ```bash
 pip install -r requirements.txt && pip install -e .
 # put sensor_telemetry.csv, failure_labels.csv and maintenance_log.csv in data/raw/
-pytest                                   # 41 tests
+pytest                                   # 43 tests
 python -m pdm.pipeline                   # ≈ 30 s → data/processed/dataset.parquet
 python -m pdm.train                      # ≈ 8 min → MLflow runs, registered models, reports/stage3_*
 mlflow ui --backend-store-uri sqlite:///mlflow.db     # browse runs and the Model Registry
@@ -73,6 +73,19 @@ nothing about the real HPUs.
   machine* a row came from. Validation uses **leave-one-machine-out** folds.
 
 
+## Stage 3 results (leave-one-machine-out, real data)
+
+| Task | Model | Result | Best baseline |
+|---|---|---|---|
+| Failure mode | LightGBM | macro-F1 **0.988** on seen-mode folds; 0 of 8,576 healthy hours flagged; 8/9 events named; the unseen cylinder-drift machine is 91 % flagged as abnormal | logistic regression 0.944 |
+| RUL | XGBoost | MAE **39.9 h** in the last 14 days (pump wear / valve leakage 16–23 h; contamination 61–79 h) | ridge 45.6 h |
+| Early warning (7 d) | LightGBM | **9/9** failures warned, mean lead **221 h** (9.2 days), **0 false alarms** | rules 195 h, 0 false alarms |
+
+All three passed the gate and are registered as `@champion`. Full tables: `reports/stage3_model_comparison.md`;
+analysis: notebook 03. Main limits: 9 failure events in total, and cylinder drift seen once, so it
+cannot be named and its RUL is over-estimated. The dashboard should show "abnormal, inspect" there,
+not an hour count.
+
 ## Stage 3 design decisions
 
 * **Leave-one-machine-out, out-of-fold everything.** Every reported number comes from a model that
@@ -84,7 +97,9 @@ nothing about the real HPUs.
 * **Primary metrics:** macro-F1 on seen-mode folds; RUL MAE in the last 14 days before failure (plus
   RMSE and the asymmetric NASA score); early-warning mean lead time per event at a fixed
   false-alarm rate (0.2 % of healthy hours, 3-hour persistence), compared at the rule detector's
-  own false-alarm rate when that is lower.
+  own false-alarm rate when that is lower. A false alarm is an alarm on a *healthy* hour: alarms in
+  the early part of a long degradation window (more than 7 days before failure) are correct early
+  detections, and those hours are left out of early-warning training.
 * **Early warning without leakage:** isotonic calibration and the alarm threshold are fitted on an
   inner leave-one-machine-out over the nine training machines of each fold.
 * **No hyperparameter tuning** with 9 failure events; fixed conservative LightGBM / XGBoost settings

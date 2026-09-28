@@ -22,7 +22,7 @@ from sklearn.isotonic import IsotonicRegression
 from sklearn.linear_model import LogisticRegression
 
 from .baselines import RuleBaseline
-from .data import ModelData, classification_rows, fold_split, rul_rows, warning_rows
+from .data import ModelData, classification_rows, early_degradation, fold_split, rul_rows, warning_rows, warning_train_rows
 from .estimators import make_classifier, make_regressor, positive_proba
 from .metrics import (alarms_from_scores, classification_metrics, confusion_frame, event_mode_identification,
                       regression_metrics, threshold_for_far, warning_metrics)
@@ -151,7 +151,9 @@ def run_warning(data: ModelData, cfg: dict, model: str, target_far: float | None
     ew = cfg["modelling"]["early_warning"]
     target_far = ew["target_false_alarm_rate"] if target_far is None else target_far
     horizon, persistence = float(cfg["targets"]["warning_horizon_hours"]), int(ew["persistence_h"])
-    tmask, active, machine = warning_rows(ds), ds["eligible"], ds["machine_id"]
+    scored, active, machine = warning_rows(ds), ds["eligible"], ds["machine_id"]
+    tmask = warning_train_rows(ds)                   # fit + calibration rows (no early-degradation hours)
+    early = early_degradation(ds).to_numpy()
 
     raw = np.full(len(ds), np.nan)       # outer out-of-fold raw scores, every row of every machine
     prob = np.full(len(ds), np.nan)
@@ -176,19 +178,19 @@ def run_warning(data: ModelData, cfg: dict, model: str, target_far: float | None
             cal = fit_calibrator(inner[cal_rows], ds["fail_within_h"].to_numpy(float)[cal_rows], ew["calibration"])
             sub = np.flatnonzero(in_tr)
             thr = threshold_for_far(inner[sub], ds["fail_within_h"].to_numpy(float)[sub], machine.to_numpy()[sub],
-                                    active.to_numpy()[sub], tmask.to_numpy()[sub], target_far, persistence)
+                                    active.to_numpy()[sub], scored.to_numpy()[sub], target_far, persistence, early[sub])
             idx_m = np.flatnonzero(machine.eq(m))
             _, raw[idx_m] = _score_machines(ds, X_cols, tmask & machine.ne(m), idx_m, model, cfg)
             prob[idx_m] = cal.predict(raw[idx_m])
             alarm[idx_m] = alarms_from_scores(raw[idx_m], machine.to_numpy()[idx_m], active.to_numpy()[idx_m], thr, persistence)
             inner_alarm = alarms_from_scores(inner[sub], machine.to_numpy()[sub], active.to_numpy()[sub], thr, persistence)
-            neg = tmask.to_numpy()[sub] & (ds["fail_within_h"].to_numpy(float)[sub] == 0)
+            neg = scored.to_numpy()[sub] & (ds["fail_within_h"].to_numpy(float)[sub] == 0) & ~early[sub]
             fold_info.append({"fold": f.fold, "test_machine": m, "threshold_raw": thr,
                               "threshold_prob": float(cal.predict([thr])[0]) if np.isfinite(thr) else np.nan,
                               "inner_far": float(inner_alarm[neg].mean())})
 
-    frame = ds[["machine_id", "timestamp", "fold"]].assign(y=ds["fail_within_h"].astype(float).to_numpy(), scored=tmask.to_numpy(),
-                                                          alarm=alarm, score=prob, raw_score=raw)
+    frame = ds[["machine_id", "timestamp", "fold"]].assign(y=ds["fail_within_h"].astype(float).to_numpy(), scored=scored.to_numpy(),
+                                                          early=early, alarm=alarm, score=prob, raw_score=raw)
     summary, lt = warning_metrics(frame, data.events, horizon)
     fold_rows = []
     for fi in fold_info:
@@ -207,7 +209,7 @@ def run_warning(data: ModelData, cfg: dict, model: str, target_far: float | None
         sc = tmask.to_numpy()
         final["calibrator"] = fit_calibrator(raw[sc], ds["fail_within_h"].to_numpy(float)[sc], ew["calibration"])
         final["threshold_raw"] = threshold_for_far(raw, ds["fail_within_h"].to_numpy(float), machine.to_numpy(), active.to_numpy(),
-                                                   sc, target_far, persistence)
+                                                   scored.to_numpy(), target_far, persistence, early)
         final["threshold_prob"] = float(final["calibrator"].predict([final["threshold_raw"]])[0])
         final["persistence_h"] = persistence
     oof = frame[frame["scored"]].reset_index(drop=True)
@@ -228,7 +230,7 @@ def far_sweep(data: ModelData, cfg: dict, result: TaskResult, targets=(0.0, 0.00
     persistence = int(cfg["modelling"]["early_warning"]["persistence_h"])
     rows = []
     for t in targets:
-        thr = threshold_for_far(raw, frame["y"], frame["machine_id"], ds["eligible"], frame["scored"], t, persistence)
+        thr = threshold_for_far(raw, frame["y"], frame["machine_id"], ds["eligible"], frame["scored"], t, persistence, frame["early"])
         f = frame.assign(alarm=alarms_from_scores(raw, frame["machine_id"], ds["eligible"], thr, persistence))
         m, _ = warning_metrics(f, data.events, float(cfg["targets"]["warning_horizon_hours"]))
         rows.append({"target_far": t, "realised_far": m["false_alarm_rate"], "recall": m["recall"], "precision": m["precision"],
