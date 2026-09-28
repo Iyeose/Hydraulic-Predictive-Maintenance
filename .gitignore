@@ -10,3 +10,7 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 .venv/
+# MLflow tracking store and artefacts are local state, like the data (Stage 3)
+mlflow.db
+mlartifacts/
+mlruns/

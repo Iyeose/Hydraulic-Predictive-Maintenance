@@ -1,0 +1,3092 @@
+{
+  "data_label": "real",
+  "dataset_hash": "0f087751a4eb",
+  "n_features": 171,
+  "tasks": {
+    "failure_mode": {
+      "gate": {
+        "selected": "lightgbm",
+        "primary_metric": "macro_f1_seen",
+        "value": 0.9884921507985573,
+        "higher_is_better": true,
+        "beats_baselines": {
+          "rules": true,
+          "logreg": true
+        },
+        "within_false_alarm_budget": true,
+        "passes_gate": true
+      },
+      "models": {
+        "rules": {
+          "summary": {
+            "macro_f1_seen": 0.6228600318174948,
+            "macro_f1_all": 0.6548394555437212,
+            "accuracy_seen": 0.8999168572022449,
+            "detection_recall": 0.8366477272727273,
+            "healthy_false_positive_rate": 0.0,
+            "macro_f1_fold_mean": 0.7573020413295379,
+            "events_mode_correct": 6,
+            "events_total": 9,
+            "f1_seen_healthy": 0.9823353102480709,
+            "f1_seen_pump_wear": 0.23204419889502761,
+            "f1_seen_valve_leakage": 0.7366504854368932,
+            "f1_seen_contamination": 0.5404101326899879,
+            "unseen_fold5_detection_recall": 0.6458333333333334
+          },
+          "mlflow_run_id": "03b46b95d59f482ab61e6579e8f6a03d"
+        },
+        "logreg": {
+          "summary": {
+            "macro_f1_seen": 0.9441418168493002,
+            "macro_f1_all": 0.7339622109502546,
+            "accuracy_seen": 0.9827478694658075,
+            "detection_recall": 0.9583333333333334,
+            "healthy_false_positive_rate": 0.0038479477611940297,
+            "macro_f1_fold_mean": 0.6883164910349074,
+            "events_mode_correct": 8,
+            "events_total": 9,
+            "f1_seen_healthy": 0.9924977363859785,
+            "f1_seen_pump_wear": 0.9484004127966976,
+            "f1_seen_valve_leakage": 0.953998584571833,
+            "f1_seen_contamination": 0.8816705336426914,
+            "unseen_fold5_detection_recall": 0.9947916666666666
+          },
+          "mlflow_run_id": "d6f0df53a4b64065be1f87db6e0776f0"
+        },
+        "lightgbm": {
+          "summary": {
+            "macro_f1_seen": 0.9884921507985573,
+            "macro_f1_all": 0.7448261494387296,
+            "accuracy_seen": 0.9934525046767824,
+            "detection_recall": 0.9621212121212122,
+            "healthy_false_positive_rate": 0.0,
+            "macro_f1_fold_mean": 0.8789500893297728,
+            "events_mode_correct": 8,
+            "events_total": 9,
+            "f1_seen_healthy": 0.9959912065175223,
+            "f1_seen_pump_wear": 0.9819915254237288,
+            "f1_seen_valve_leakage": 0.9801699716713881,
+            "f1_seen_contamination": 0.99581589958159,
+            "unseen_fold5_detection_recall": 0.90625
+          },
+          "mlflow_run_id": "ee3f77562fa44bf3ab4eafb595cf3fef"
+        },
+        "xgboost": {
+          "summary": {
+            "macro_f1_seen": 0.9884425900943548,
+            "macro_f1_all": 0.7669100122754264,
+            "accuracy_seen": 0.9935564331739763,
+            "detection_recall": 0.9640151515151515,
+            "healthy_false_positive_rate": 0.0,
+            "macro_f1_fold_mean": 0.8791667044434558,
+            "events_mode_correct": 8,
+            "events_total": 9,
+            "f1_seen_healthy": 0.9961200206932229,
+            "f1_seen_pump_wear": 0.9830508474576272,
+            "f1_seen_valve_leakage": 0.9787835926449788,
+            "f1_seen_contamination": 0.99581589958159,
+            "unseen_fold5_detection_recall": 0.9166666666666666
+          },
+          "mlflow_run_id": "666cc6593a0d4503bcd51d10790fa972"
+        }
+      },
+      "per_fold": {
+        "rules": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.301611540485886,
+            "detection_recall": 0.8452380952380952,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9458239397960869,
+            "detection_recall": 0.8416666666666667,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 0.9806687565308255,
+            "detection_recall": 0.9333333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.29568827173814954,
+            "detection_recall": 0.84375,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9412653805357556,
+            "detection_recall": 0.8291666666666667,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "unseen_mode": "cylinder_drift",
+            "macro_f1": 0.8736825963307868,
+            "detection_recall": 0.6458333333333334,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9518598231660885,
+            "detection_recall": 0.8583333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.30176011990881935,
+            "detection_recall": 0.8482142857142857,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 0.9806599848029816,
+            "detection_recall": 0.9333333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "unseen_mode": "",
+            "macro_f1": 1.0,
+            "detection_recall": NaN,
+            "healthy_fpr": 0.0
+          }
+        ],
+        "logreg": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9792384847599571,
+            "detection_recall": 0.9613095238095238,
+            "healthy_fpr": 0.00821917808219178
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.6493527311462101,
+            "detection_recall": 0.925,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 0.49737169641438483,
+            "detection_recall": 0.9916666666666667,
+            "healthy_fpr": 0.011542497376705142
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9780869060452775,
+            "detection_recall": 0.9375,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9708853238265003,
+            "detection_recall": 0.9125,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "unseen_mode": "cylinder_drift",
+            "macro_f1": 0.2492836676217765,
+            "detection_recall": 0.9947916666666666,
+            "healthy_fpr": 0.004576659038901602
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9891956782713085,
+            "detection_recall": 0.975,
+            "healthy_fpr": 0.0024067388688327317
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.6576806199507531,
+            "detection_recall": 0.9732142857142857,
+            "healthy_fpr": 0.0054869684499314125
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 0.5795098641845217,
+            "detection_recall": 0.9916666666666667,
+            "healthy_fpr": 0.001053740779768177
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "unseen_mode": "",
+            "macro_f1": 0.33255993812838364,
+            "detection_recall": NaN,
+            "healthy_fpr": 0.004629629629629629
+          }
+        ],
+        "lightgbm": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9868330039525692,
+            "detection_recall": 0.9642857142857143,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9835909704330756,
+            "detection_recall": 0.95,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 0.9952742103130561,
+            "detection_recall": 0.9833333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9915834854767065,
+            "detection_recall": 0.9756944444444444,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.6577791359486612,
+            "detection_recall": 0.9625,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "unseen_mode": "cylinder_drift",
+            "macro_f1": 0.19796149490373727,
+            "detection_recall": 0.90625,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9918723249248702,
+            "detection_recall": 0.975,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9846062673450509,
+            "detection_recall": 0.9583333333333334,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 1.0,
+            "detection_recall": 1.0,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "unseen_mode": "",
+            "macro_f1": 1.0,
+            "detection_recall": NaN,
+            "healthy_fpr": 0.0
+          }
+        ],
+        "xgboost": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9879403207344001,
+            "detection_recall": 0.9672619047619048,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9821961343468695,
+            "detection_recall": 0.9458333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 0.9952742103130561,
+            "detection_recall": 0.9833333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.9915834854767065,
+            "detection_recall": 0.9756944444444444,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9905033587227353,
+            "detection_recall": 0.9708333333333333,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "unseen_mode": "cylinder_drift",
+            "macro_f1": 0.1981859410430839,
+            "detection_recall": 0.9166666666666666,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "unseen_mode": "",
+            "macro_f1": 0.9891302141479752,
+            "detection_recall": 0.9666666666666667,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "unseen_mode": "",
+            "macro_f1": 0.6568533796497322,
+            "detection_recall": 0.9642857142857143,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "unseen_mode": "",
+            "macro_f1": 1.0,
+            "detection_recall": 1.0,
+            "healthy_fpr": 0.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "unseen_mode": "",
+            "macro_f1": 1.0,
+            "detection_recall": NaN,
+            "healthy_fpr": 0.0
+          }
+        ]
+      },
+      "events": {
+        "rules": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.9333333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.8291666666666667,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.9333333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "true_mode": "pump_wear",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.8482142857142857,
+            "share_flagged_as_true_mode": 0.16140350877192983,
+            "correct": false
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "true_mode": "pump_wear",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.8452380952380952,
+            "share_flagged_as_true_mode": 0.1619718309859155,
+            "correct": false
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "true_mode": "cylinder_drift",
+            "predicted_mode": "cylinder_drift",
+            "share_hours_flagged": 0.6458333333333334,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.8416666666666667,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.8583333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "true_mode": "pump_wear",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.84375,
+            "share_flagged_as_true_mode": 0.13991769547325103,
+            "correct": false
+          }
+        ],
+        "logreg": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.9916666666666667,
+            "share_flagged_as_true_mode": 0.5966386554621849,
+            "correct": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.9125,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.9916666666666667,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9732142857142857,
+            "share_flagged_as_true_mode": 0.9969418960244648,
+            "correct": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9613095238095238,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "true_mode": "cylinder_drift",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.9947916666666666,
+            "share_flagged_as_true_mode": 0.0,
+            "correct": false
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.925,
+            "share_flagged_as_true_mode": 0.9954954954954955,
+            "correct": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.975,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9375,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          }
+        ],
+        "lightgbm": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 1.0,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.9625,
+            "share_flagged_as_true_mode": 0.9956709956709957,
+            "correct": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.9833333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9583333333333334,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9642857142857143,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "true_mode": "cylinder_drift",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.90625,
+            "share_flagged_as_true_mode": 0.0,
+            "correct": false
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.95,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.975,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9756944444444444,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          }
+        ],
+        "xgboost": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 1.0,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.9708333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "true_mode": "contamination",
+            "predicted_mode": "contamination",
+            "share_hours_flagged": 0.9833333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9642857142857143,
+            "share_flagged_as_true_mode": 0.9938271604938271,
+            "correct": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9672619047619048,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "true_mode": "cylinder_drift",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9166666666666666,
+            "share_flagged_as_true_mode": 0.0,
+            "correct": false
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.9458333333333333,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "true_mode": "valve_leakage",
+            "predicted_mode": "valve_leakage",
+            "share_hours_flagged": 0.9666666666666667,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "true_mode": "pump_wear",
+            "predicted_mode": "pump_wear",
+            "share_hours_flagged": 0.9756944444444444,
+            "share_flagged_as_true_mode": 1.0,
+            "correct": true
+          }
+        ]
+      },
+      "confusion_all": {
+        "rules": {
+          "healthy": {
+            "healthy": 8576,
+            "pump_wear": 148,
+            "valve_leakage": 113,
+            "contamination": 16,
+            "cylinder_drift": 68
+          },
+          "pump_wear": {
+            "healthy": 0,
+            "pump_wear": 126,
+            "valve_leakage": 0,
+            "contamination": 0,
+            "cylinder_drift": 0
+          },
+          "valve_leakage": {
+            "healthy": 0,
+            "pump_wear": 321,
+            "valve_leakage": 607,
+            "contamination": 0,
+            "cylinder_drift": 0
+          },
+          "contamination": {
+            "healthy": 0,
+            "pump_wear": 365,
+            "valve_leakage": 0,
+            "contamination": 224,
+            "cylinder_drift": 0
+          },
+          "cylinder_drift": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 0,
+            "cylinder_drift": 124
+          }
+        },
+        "logreg": {
+          "healthy": {
+            "healthy": 8543,
+            "pump_wear": 40,
+            "valve_leakage": 45,
+            "contamination": 2,
+            "cylinder_drift": 1
+          },
+          "pump_wear": {
+            "healthy": 13,
+            "pump_wear": 919,
+            "valve_leakage": 1,
+            "contamination": 48,
+            "cylinder_drift": 93
+          },
+          "valve_leakage": {
+            "healthy": 19,
+            "pump_wear": 1,
+            "valve_leakage": 674,
+            "contamination": 0,
+            "cylinder_drift": 98
+          },
+          "contamination": {
+            "healthy": 1,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 190,
+            "cylinder_drift": 0
+          },
+          "cylinder_drift": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 0,
+            "cylinder_drift": 0
+          }
+        },
+        "lightgbm": {
+          "healthy": {
+            "healthy": 8576,
+            "pump_wear": 33,
+            "valve_leakage": 27,
+            "contamination": 2,
+            "cylinder_drift": 18
+          },
+          "pump_wear": {
+            "healthy": 0,
+            "pump_wear": 927,
+            "valve_leakage": 1,
+            "contamination": 0,
+            "cylinder_drift": 50
+          },
+          "valve_leakage": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 692,
+            "contamination": 0,
+            "cylinder_drift": 2
+          },
+          "contamination": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 238,
+            "cylinder_drift": 122
+          },
+          "cylinder_drift": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 0,
+            "cylinder_drift": 0
+          }
+        },
+        "xgboost": {
+          "healthy": {
+            "healthy": 8576,
+            "pump_wear": 30,
+            "valve_leakage": 28,
+            "contamination": 2,
+            "cylinder_drift": 16
+          },
+          "pump_wear": {
+            "healthy": 0,
+            "pump_wear": 928,
+            "valve_leakage": 0,
+            "contamination": 0,
+            "cylinder_drift": 151
+          },
+          "valve_leakage": {
+            "healthy": 0,
+            "pump_wear": 2,
+            "valve_leakage": 692,
+            "contamination": 0,
+            "cylinder_drift": 3
+          },
+          "contamination": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 238,
+            "cylinder_drift": 22
+          },
+          "cylinder_drift": {
+            "healthy": 0,
+            "pump_wear": 0,
+            "valve_leakage": 0,
+            "contamination": 0,
+            "cylinder_drift": 0
+          }
+        }
+      },
+      "shap_top": {
+        "z_pressure_bar_mean_roll24h_std": 1.0639,
+        "pct_pressure_minus_flow_mean_roll24h_max": 0.5719,
+        "z_flow_lpm_mean_roll72h_max": 0.5481,
+        "z_flow_lpm_mean_roll6h_max": 0.4575,
+        "z_pressure_bar_max": 0.4273,
+        "pct_pressure_minus_flow_mean_roll72h_std": 0.402,
+        "pct_pressure_minus_flow_mean_roll24h_std": 0.3597,
+        "pct_pressure_minus_flow_mean": 0.344,
+        "pct_pressure_minus_flow_mean_roll24h_min": 0.3174,
+        "z_pressure_bar_mean_roll6h_max": 0.3019,
+        "z_pressure_bar_mean_roll72h_max": 0.294,
+        "z_temp_celsius_mean_diff24h": 0.2878,
+        "fz_pressure_bar_mean": 0.287,
+        "pct_pressure_minus_flow_mean_roll72h_max": 0.2771,
+        "z_pressure_bar_mean_roll72h_slope": 0.2718
+      },
+      "registered": {
+        "name": "hpu-failure-mode",
+        "version": 1,
+        "alias": "champion",
+        "model_uri": "models:/m-05770aff160842148a29e4894ebdc6ac"
+      }
+    },
+    "rul": {
+      "gate": {
+        "selected": "xgboost",
+        "primary_metric": "mae_critical",
+        "value": 39.88646224515686,
+        "higher_is_better": false,
+        "beats_baselines": {
+          "constant": true,
+          "ridge": true
+        },
+        "within_false_alarm_budget": true,
+        "passes_gate": true
+      },
+      "models": {
+        "constant": {
+          "summary": {
+            "mae_all": 83.96820281884067,
+            "rmse_all": 101.51150797757914,
+            "nasa_all": 0.4151107486940472,
+            "n_all": 8080,
+            "mae_critical": 120.91239975627263,
+            "rmse_critical": 146.4482139209462,
+            "nasa_critical": 0.7519355565075936,
+            "n_critical": 2928
+          },
+          "mlflow_run_id": "b7d8f26f7afb4c2e9364e359cafaf2aa"
+        },
+        "ridge": {
+          "summary": {
+            "mae_all": 25.601433394717017,
+            "rmse_all": 43.725041806224006,
+            "nasa_all": 0.11509568188748168,
+            "n_all": 8080,
+            "mae_critical": 45.60556387982381,
+            "rmse_critical": 68.40368658161535,
+            "nasa_critical": 0.2341783149968809,
+            "n_critical": 2928
+          },
+          "mlflow_run_id": "1c7736ce24874522a9932195f4d08dcc"
+        },
+        "lightgbm": {
+          "summary": {
+            "mae_all": 22.987783707682283,
+            "rmse_all": 44.08940650346435,
+            "nasa_all": 0.10564930074706645,
+            "n_all": 8080,
+            "mae_critical": 41.24570570554698,
+            "rmse_critical": 67.547618029258,
+            "nasa_critical": 0.21594526864660135,
+            "n_critical": 2928
+          },
+          "mlflow_run_id": "8be3487ce2214de18ee4799f179e1396"
+        },
+        "xgboost": {
+          "summary": {
+            "mae_all": 23.993974357902413,
+            "rmse_all": 45.291845291248954,
+            "nasa_all": 0.10805817548107072,
+            "n_all": 8080,
+            "mae_critical": 39.88646224515686,
+            "rmse_critical": 64.93803193135773,
+            "nasa_critical": 0.20555539132070602,
+            "n_critical": 2928
+          },
+          "mlflow_run_id": "8810a23088b044e89a128241db21e18f"
+        }
+      },
+      "per_fold": {
+        "constant": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "mae_all": 87.41385071288788,
+            "rmse_all": 107.9719052841042,
+            "nasa_all": 0.4551151004120922,
+            "n_all": 730,
+            "mae_critical": 118.39967930029154,
+            "rmse_critical": 144.7979572091384,
+            "nasa_critical": 0.7356314625157027,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "mae_all": 83.22291284610529,
+            "rmse_all": 101.19228970464657,
+            "nasa_all": 0.4128978193538165,
+            "n_all": 888,
+            "mae_critical": 117.54820832671223,
+            "rmse_critical": 143.80592414219262,
+            "nasa_critical": 0.7279517865371519,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "mae_all": 87.17759536537903,
+            "rmse_all": 107.61365139217827,
+            "nasa_all": 0.45281361290314737,
+            "n_all": 737,
+            "mae_critical": 118.36258616888128,
+            "rmse_critical": 144.75479387601607,
+            "nasa_critical": 0.7352966161114081,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "mae_all": 80.90593406013252,
+            "rmse_all": 96.81832196678207,
+            "nasa_all": 0.3871574941663868,
+            "n_all": 1032,
+            "mae_critical": 116.74829738933029,
+            "rmse_critical": 142.86831398787558,
+            "nasa_critical": 0.7207347208166048,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "mae_all": 87.24451359849591,
+            "rmse_all": 107.71536888123907,
+            "nasa_all": 0.45346623563070404,
+            "n_all": 735,
+            "mae_critical": 118.37317336056273,
+            "rmse_critical": 144.76713358210944,
+            "nasa_critical": 0.7353922751629927,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "mae_all": 85.50377817693955,
+            "rmse_all": 105.00420773866868,
+            "nasa_all": 0.4362877942465008,
+            "n_all": 792,
+            "mae_critical": 118.06916130887038,
+            "rmse_critical": 144.4131397561339,
+            "nasa_critical": 0.7326485726686784,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "mae_all": 81.92639044943822,
+            "rmse_all": 98.8326077340513,
+            "nasa_all": 0.39886549607463945,
+            "n_all": 960,
+            "mae_critical": 117.15052166934191,
+            "rmse_critical": 143.34121226738802,
+            "nasa_critical": 0.724367427116204,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "mae_all": 87.448083824994,
+            "rmse_all": 108.0236005033772,
+            "nasa_all": 0.45544791672501417,
+            "n_all": 729,
+            "mae_critical": 118.40501292341179,
+            "rmse_critical": 144.8041175432903,
+            "nasa_critical": 0.7356794023775601,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "mae_all": 92.1650054007622,
+            "rmse_all": 109.44862688295397,
+            "nasa_all": 0.47004277555452356,
+            "n_all": 733,
+            "mae_critical": 154.8519804001633,
+            "rmse_critical": 169.64389909607488,
+            "nasa_critical": 0.9868306207638172,
+            "n_critical": 240.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "mae_all": 68.82333696837513,
+            "rmse_all": 68.82333696837516,
+            "nasa_all": 0.24680916348669765,
+            "n_all": 744,
+            "mae_critical": NaN,
+            "rmse_critical": NaN,
+            "nasa_critical": NaN,
+            "n_critical": NaN
+          }
+        ],
+        "ridge": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "mae_all": 17.941762002170112,
+            "rmse_all": 21.83875857240846,
+            "nasa_all": 0.06011364999270107,
+            "n_all": 730,
+            "mae_critical": 22.697802784593268,
+            "rmse_critical": 26.801316721327765,
+            "nasa_critical": 0.07674303437442123,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "mae_all": 16.205875016003557,
+            "rmse_all": 20.15055147231765,
+            "nasa_all": 0.058941661219252116,
+            "n_all": 888,
+            "mae_critical": 20.678683427909235,
+            "rmse_critical": 26.00486509243566,
+            "nasa_critical": 0.08269334769625096,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "mae_all": 36.70246947135527,
+            "rmse_all": 63.780079946310465,
+            "nasa_all": 0.19119573181606447,
+            "n_all": 737,
+            "mae_critical": 69.58871505879517,
+            "rmse_critical": 93.55323968074899,
+            "nasa_critical": 0.3834978673852786,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "mae_all": 20.214095396598168,
+            "rmse_all": 23.06978321022607,
+            "nasa_all": 0.07476264048368751,
+            "n_all": 1032,
+            "mae_critical": 21.20869914249118,
+            "rmse_critical": 25.975013502609873,
+            "nasa_critical": 0.0935394770520913,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "mae_all": 21.944228205710154,
+            "rmse_all": 29.502693638089045,
+            "nasa_all": 0.08452370593340384,
+            "n_all": 735,
+            "mae_critical": 27.573796265729634,
+            "rmse_critical": 36.311949172937815,
+            "nasa_critical": 0.11629135362939386,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "mae_all": 48.40531463141946,
+            "rmse_all": 77.26038655480531,
+            "nasa_all": 0.26185494852127733,
+            "n_all": 792,
+            "mae_critical": 103.289858564687,
+            "rmse_critical": 117.83664903584615,
+            "nasa_critical": 0.5816186306401683,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "mae_all": 19.930964064078747,
+            "rmse_all": 28.66170349490069,
+            "nasa_all": 0.08436973578182502,
+            "n_all": 960,
+            "mae_critical": 39.065536384472914,
+            "rmse_critical": 45.38667408780733,
+            "nasa_critical": 0.18224439056588518,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "mae_all": 11.30179766913885,
+            "rmse_all": 14.32844463784749,
+            "nasa_all": 0.03990213423840288,
+            "n_all": 729,
+            "mae_critical": 10.168438560999071,
+            "rmse_critical": 13.465848694783018,
+            "nasa_critical": 0.0391826337877512,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "mae_all": 49.0747467358092,
+            "rmse_all": 78.64213737621454,
+            "nasa_all": 0.2598375720028283,
+            "n_all": 733,
+            "mae_critical": 116.40773706830211,
+            "rmse_critical": 132.32945266985416,
+            "nasa_critical": 0.6788404137782105,
+            "n_critical": 240.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "mae_all": 18.34686804421082,
+            "rmse_all": 21.783301585233172,
+            "nasa_all": 0.06132401221445546,
+            "n_all": 744,
+            "mae_critical": NaN,
+            "rmse_critical": NaN,
+            "nasa_critical": NaN,
+            "n_critical": NaN
+          }
+        ],
+        "lightgbm": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "mae_all": 17.0931510477523,
+            "rmse_all": 21.642547028723012,
+            "nasa_all": 0.05789887256299266,
+            "n_all": 730,
+            "mae_critical": 19.399663093210247,
+            "rmse_critical": 23.993797465391662,
+            "nasa_critical": 0.06658302583519293,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "mae_all": 10.9429390973052,
+            "rmse_all": 16.089581680377176,
+            "nasa_all": 0.039269516866563436,
+            "n_all": 888,
+            "mae_critical": 14.388759438984643,
+            "rmse_critical": 20.289415501638842,
+            "nasa_critical": 0.05575838030908674,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "mae_all": 36.23483138513525,
+            "rmse_all": 64.91849274588567,
+            "nasa_all": 0.19176718916030738,
+            "n_all": 737,
+            "mae_critical": 68.25944230321299,
+            "rmse_critical": 94.90074581891515,
+            "nasa_critical": 0.38341439666713967,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "mae_all": 12.495996820955998,
+            "rmse_all": 17.134060441514787,
+            "nasa_all": 0.048708554771257316,
+            "n_all": 1032,
+            "mae_critical": 20.915512916216446,
+            "rmse_critical": 23.611691105331587,
+            "nasa_critical": 0.09180599307225593,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "mae_all": 23.716021413435318,
+            "rmse_all": 39.80632434454787,
+            "nasa_all": 0.09173404522420928,
+            "n_all": 735,
+            "mae_critical": 14.830247816876366,
+            "rmse_critical": 22.47603040654976,
+            "nasa_critical": 0.06443078041310432,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "mae_all": 54.01521571013391,
+            "rmse_all": 89.18615798492151,
+            "nasa_all": 0.3118124092632896,
+            "n_all": 792,
+            "mae_critical": 120.00795793030377,
+            "rmse_critical": 136.54081722181215,
+            "nasa_critical": 0.710990522137384,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "mae_all": 15.261539841695418,
+            "rmse_all": 24.296127632436246,
+            "nasa_all": 0.06140958341628776,
+            "n_all": 960,
+            "mae_critical": 25.047219893597703,
+            "rmse_critical": 35.88334382324108,
+            "nasa_critical": 0.1138544582872019,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "mae_all": 17.096349582218455,
+            "rmse_all": 22.21940474551866,
+            "nasa_all": 0.058981501392577955,
+            "n_all": 729,
+            "mae_critical": 19.993119996517112,
+            "rmse_critical": 23.031126212785278,
+            "nasa_critical": 0.07025052809320911,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "mae_all": 37.921154270179365,
+            "rmse_all": 64.39574277595811,
+            "nasa_all": 0.189228304224631,
+            "n_all": 733,
+            "mae_critical": 79.21891686318617,
+            "rmse_critical": 107.42443144802975,
+            "nasa_critical": 0.4546089587481321,
+            "n_critical": 240.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "mae_all": 11.859103454204348,
+            "rmse_all": 19.91778632903004,
+            "nasa_all": 0.04015347067865662,
+            "n_all": 744,
+            "mae_critical": NaN,
+            "rmse_critical": NaN,
+            "nasa_critical": NaN,
+            "n_critical": NaN
+          }
+        ],
+        "xgboost": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "test_modes": "pump_wear",
+            "mae_all": 17.214587428471813,
+            "rmse_all": 23.753334479090352,
+            "nasa_all": 0.059084390221798906,
+            "n_all": 730,
+            "mae_critical": 23.031893378212338,
+            "rmse_critical": 28.685026481961163,
+            "nasa_critical": 0.08014223575740055,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "test_modes": "valve_leakage",
+            "mae_all": 18.536016074386804,
+            "rmse_all": 29.26488516120653,
+            "nasa_all": 0.06713306006055238,
+            "n_all": 888,
+            "mae_critical": 17.18246683904103,
+            "rmse_critical": 23.1280445327985,
+            "nasa_critical": 0.06587328338134459,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "test_modes": "contamination",
+            "mae_all": 32.678581206737086,
+            "rmse_all": 60.948724185437364,
+            "nasa_all": 0.17161850152220587,
+            "n_all": 737,
+            "mae_critical": 60.487559545607795,
+            "rmse_critical": 88.68725080097741,
+            "nasa_critical": 0.33906452205522963,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "test_modes": "pump_wear",
+            "mae_all": 11.12638176319211,
+            "rmse_all": 16.523400064679215,
+            "nasa_all": 0.04439963629085654,
+            "n_all": 1032,
+            "mae_critical": 21.242845126560756,
+            "rmse_critical": 23.38336575463769,
+            "nasa_critical": 0.09333982278609645,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "test_modes": "valve_leakage",
+            "mae_all": 23.53124048531461,
+            "rmse_all": 38.5384422866855,
+            "nasa_all": 0.08950982550907967,
+            "n_all": 735,
+            "mae_critical": 15.581776377700624,
+            "rmse_critical": 23.088504718220072,
+            "nasa_critical": 0.06507979706086181,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "test_modes": "cylinder_drift",
+            "mae_all": 51.946978347470065,
+            "rmse_all": 84.81278345693048,
+            "nasa_all": 0.29304020862477076,
+            "n_all": 792,
+            "mae_critical": 114.2766186396281,
+            "rmse_critical": 129.78916871798785,
+            "nasa_critical": 0.663974820039026,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "test_modes": "valve_leakage",
+            "mae_all": 14.390084420641264,
+            "rmse_all": 23.01019983070957,
+            "nasa_all": 0.05648459382174414,
+            "n_all": 960,
+            "mae_critical": 20.67329523393086,
+            "rmse_critical": 30.969528268024973,
+            "nasa_critical": 0.09289971412395566,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "test_modes": "pump_wear",
+            "mae_all": 28.487702138139387,
+            "rmse_all": 49.08599220612976,
+            "nasa_all": 0.10755146106606467,
+            "n_all": 729,
+            "mae_critical": 18.89204808643886,
+            "rmse_critical": 21.903288762810526,
+            "nasa_critical": 0.06736914675551789,
+            "n_critical": 336.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "test_modes": "contamination",
+            "mae_all": 38.39842036768977,
+            "rmse_all": 64.40835395238125,
+            "nasa_all": 0.19097342013307328,
+            "n_all": 733,
+            "mae_critical": 78.69893487294515,
+            "rmse_critical": 106.88684077618512,
+            "nasa_critical": 0.45293509536940835,
+            "n_critical": 240.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "test_modes": "none (healthy reference)",
+            "mae_all": 10.904052078082998,
+            "rmse_all": 19.701143697423866,
+            "nasa_all": 0.03705608372818248,
+            "n_all": 744,
+            "mae_critical": NaN,
+            "rmse_critical": NaN,
+            "nasa_critical": NaN,
+            "n_critical": NaN
+          }
+        ]
+      },
+      "shap_top": {
+        "z_pressure_bar_mean_roll24h_std": 25.14310073852539,
+        "pct_pressure_minus_flow_mean_roll72h_std": 15.63949966430664,
+        "z_temp_celsius_mean_roll72h_min": 7.207900047302246,
+        "fz_temp_celsius_mean": 5.679500102996826,
+        "z_pressure_bar_mean_roll72h_max": 4.9471001625061035,
+        "xy_nonzero_share": 3.533099889755249,
+        "vib_x_kurtosis_roll72h_max": 3.5102999210357666,
+        "z_vibration_x_g_mean_roll72h_min": 3.474900007247925,
+        "z_pressure_bar_mean_roll72h_std": 2.5789999961853027,
+        "z_vibration_x_g_max_roll72h_min": 2.3348000049591064,
+        "z_temp_celsius_mean_roll72h_max": 2.0776000022888184,
+        "xy_divergence_share": 1.9943000078201294,
+        "z_flow_lpm_mean_roll72h_max": 1.8641999959945679,
+        "z_flow_lpm_mean_roll72h_min": 1.7924000024795532,
+        "z_pressure_bar_mean_roll24h_max": 1.4140000343322754
+      },
+      "registered": {
+        "name": "hpu-rul",
+        "version": 1,
+        "alias": "champion",
+        "model_uri": "models:/m-8e1618067ad74dc4a52047966c1c643e"
+      }
+    },
+    "early_warning": {
+      "gate": {
+        "selected": "lightgbm",
+        "primary_metric": "lead_time_mean_h",
+        "value": 220.88888888888889,
+        "higher_is_better": true,
+        "beats_baselines": {
+          "rules": true,
+          "logreg": true
+        },
+        "within_false_alarm_budget": true,
+        "passes_gate": true
+      },
+      "models": {
+        "rules": {
+          "summary": {
+            "precision": 1.0,
+            "recall": 0.8954635108481263,
+            "false_alarm_rate": 0.0,
+            "early_hours_in_alarm": 0.5878084179970973,
+            "false_alarm_episodes_per_1000h": 0.0,
+            "events_detected": 9,
+            "events_total": 9,
+            "lead_time_median_h": 201.0,
+            "lead_time_mean_h": 195.33333333333334,
+            "target_false_alarm_rate": 0.002,
+            "lead_time_median_h_contamination": 111.0,
+            "lead_time_median_h_cylinder_drift": 123.0,
+            "lead_time_median_h_pump_wear": 283.0,
+            "lead_time_median_h_valve_leakage": 201.0
+          },
+          "mlflow_run_id": "8ebb78d8f7b34da7864d1b64305553d0"
+        },
+        "logreg": {
+          "summary": {
+            "precision": 0.9604677060133631,
+            "recall": 0.8625904010519395,
+            "false_alarm_rate": 0.01014575593026579,
+            "early_hours_in_alarm": 0.5994194484760522,
+            "false_alarm_episodes_per_1000h": 0.8573878250928837,
+            "events_detected": 9,
+            "events_total": 9,
+            "lead_time_median_h": 214.0,
+            "lead_time_mean_h": 205.66666666666666,
+            "roc_auc": 0.902572426535317,
+            "pr_auc": 0.9012694510606392,
+            "brier": 0.02489621430123791,
+            "target_false_alarm_rate": 0.002,
+            "lead_time_median_h_contamination": 115.0,
+            "lead_time_median_h_cylinder_drift": 168.0,
+            "lead_time_median_h_pump_wear": 283.0,
+            "lead_time_median_h_valve_leakage": 214.0
+          },
+          "mlflow_run_id": "fb3bcaefdaf948088e1539d9aad966a9"
+        },
+        "lightgbm": {
+          "summary": {
+            "precision": 1.0,
+            "recall": 0.9309664694280079,
+            "false_alarm_rate": 0.0,
+            "early_hours_in_alarm": 0.8388969521044993,
+            "false_alarm_episodes_per_1000h": 0.0,
+            "events_detected": 9,
+            "events_total": 9,
+            "lead_time_median_h": 219.0,
+            "lead_time_mean_h": 220.88888888888889,
+            "roc_auc": 0.9517722636635734,
+            "pr_auc": 0.9452355690911575,
+            "brier": 0.01739690370371046,
+            "target_false_alarm_rate": 0.002,
+            "lead_time_median_h_contamination": 115.5,
+            "lead_time_median_h_cylinder_drift": 171.0,
+            "lead_time_median_h_pump_wear": 323.0,
+            "lead_time_median_h_valve_leakage": 219.0
+          },
+          "mlflow_run_id": "13eaf1856a9749b0abe350ab21e3b41a"
+        },
+        "xgboost": {
+          "summary": {
+            "precision": 0.9841269841269841,
+            "recall": 0.8474687705456936,
+            "false_alarm_rate": 0.004286939125464418,
+            "early_hours_in_alarm": 0.8287373004354136,
+            "false_alarm_episodes_per_1000h": 0.42869391254644185,
+            "events_detected": 9,
+            "events_total": 9,
+            "lead_time_median_h": 221.0,
+            "lead_time_mean_h": 217.11111111111111,
+            "roc_auc": 0.9329764829962688,
+            "pr_auc": 0.8901859819138807,
+            "brier": 0.03334816221317559,
+            "target_false_alarm_rate": 0.002,
+            "lead_time_median_h_contamination": 115.5,
+            "lead_time_median_h_cylinder_drift": 140.0,
+            "lead_time_median_h_pump_wear": 322.0,
+            "lead_time_median_h_valve_leakage": 221.0
+          },
+          "mlflow_run_id": "5e7b8669d4c94390a82000d89fc0e19c"
+        },
+        "lightgbm@rules_far": {
+          "summary": {
+            "precision": 1.0,
+            "recall": 0.903353057199211,
+            "false_alarm_rate": 0.0,
+            "early_hours_in_alarm": 0.8113207547169812,
+            "false_alarm_episodes_per_1000h": 0.0,
+            "events_detected": 9,
+            "events_total": 9,
+            "lead_time_median_h": 219.0,
+            "lead_time_mean_h": 219.77777777777777,
+            "roc_auc": 0.9517722636635734,
+            "pr_auc": 0.9452355690911575,
+            "brier": 0.01739690370371046,
+            "target_false_alarm_rate": 0.0,
+            "lead_time_median_h_contamination": 115.5,
+            "lead_time_median_h_cylinder_drift": 165.0,
+            "lead_time_median_h_pump_wear": 322.0,
+            "lead_time_median_h_valve_leakage": 219.0
+          },
+          "mlflow_run_id": "1419c6f737254c2bb79aac4b1ef8fbcd"
+        },
+        "xgboost@rules_far": {
+          "summary": {
+            "precision": 0.9899721448467966,
+            "recall": 0.8330046022353714,
+            "false_alarm_rate": 0.002572163475278651,
+            "early_hours_in_alarm": 0.7402031930333817,
+            "false_alarm_episodes_per_1000h": 0.2857959416976279,
+            "events_detected": 9,
+            "events_total": 9,
+            "lead_time_median_h": 212.0,
+            "lead_time_mean_h": 213.66666666666666,
+            "roc_auc": 0.9329764829962688,
+            "pr_auc": 0.8901859819138807,
+            "brier": 0.03334816221317559,
+            "target_false_alarm_rate": 0.0,
+            "lead_time_median_h_contamination": 115.5,
+            "lead_time_median_h_cylinder_drift": 139.0,
+            "lead_time_median_h_pump_wear": 318.0,
+            "lead_time_median_h_valve_leakage": 212.0
+          },
+          "mlflow_run_id": "99b4e76c721d4e529f4d471dfe48659e"
+        }
+      },
+      "per_fold": {
+        "rules": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 283.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 201.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 0.6627218934911243,
+            "precision": 1.0,
+            "lead_time_h": 111.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 242.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 198.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 0.7337278106508875,
+            "precision": 1.0,
+            "lead_time_h": 123.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 205.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 284.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 0.6627218934911243,
+            "precision": 1.0,
+            "lead_time_h": 111.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "threshold_raw": NaN,
+            "threshold_prob": NaN,
+            "inner_far": NaN,
+            "far": 0.0,
+            "recall": 0.0,
+            "precision": 0.0,
+            "lead_time_h": NaN
+          }
+        ],
+        "logreg": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "threshold_raw": 0.24802080782991695,
+            "threshold_prob": 0.19736842105263158,
+            "inner_far": 0.0018645121193287756,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 302.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "threshold_raw": 0.24953650938169064,
+            "threshold_prob": 0.2255178383523085,
+            "inner_far": 0.001893939393939394,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 214.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "threshold_raw": 0.08905912974174501,
+            "threshold_prob": 0.23255813953488372,
+            "inner_far": 0.0019163206643244969,
+            "far": 0.0,
+            "recall": 0.6982248520710059,
+            "precision": 1.0,
+            "lead_time_h": 117.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "threshold_raw": 0.2619636902900079,
+            "threshold_prob": 0.3023255813953488,
+            "inner_far": 0.0019187719859290054,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 240.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "threshold_raw": 0.25766015256619146,
+            "threshold_prob": 0.2916666666666667,
+            "inner_far": 0.0018942383583267562,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 214.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "threshold_raw": 0.2382329546373132,
+            "threshold_prob": 0.06666666666666667,
+            "inner_far": 0.0019071837253655435,
+            "far": 0.0,
+            "recall": 0.40828402366863903,
+            "precision": 1.0,
+            "lead_time_h": 168.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "threshold_raw": 0.23312034082991648,
+            "threshold_prob": 0.25,
+            "inner_far": 0.001911436763300414,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 200.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "threshold_raw": 0.22386701719799773,
+            "threshold_prob": 0.1724137931034483,
+            "inner_far": 0.0017088705918906323,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 283.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "threshold_raw": 0.0990193275965274,
+            "threshold_prob": 0.025,
+            "inner_far": 0.001915097350781998,
+            "far": 0.09699453551912568,
+            "recall": 0.6568047337278107,
+            "precision": 0.6098901098901099,
+            "lead_time_h": 113.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "threshold_raw": 0.2139137563203179,
+            "threshold_prob": 0.19696969696969696,
+            "inner_far": 0.001971738416036806,
+            "far": 0.0,
+            "recall": 0.0,
+            "precision": 0.0,
+            "lead_time_h": NaN
+          }
+        ],
+        "lightgbm": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "threshold_raw": 0.014933292298622988,
+            "threshold_prob": 0.015920554854981082,
+            "inner_far": 0.0018645121193287756,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 325.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "threshold_raw": 0.1800120973449794,
+            "threshold_prob": 0.5,
+            "inner_far": 0.001893939393939394,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 218.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "threshold_raw": 0.0064769069106132065,
+            "threshold_prob": 0.06839186691312385,
+            "inner_far": 0.0019163206643244969,
+            "far": 0.0,
+            "recall": 0.6863905325443787,
+            "precision": 1.0,
+            "lead_time_h": 115.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "threshold_raw": 0.014018889925265635,
+            "threshold_prob": 0.02702702702702703,
+            "inner_far": 0.0017588743204349215,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 278.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "threshold_raw": 0.03352239870625726,
+            "threshold_prob": 0.09090909090909091,
+            "inner_far": 0.0018942383583267562,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 223.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "threshold_raw": 0.01841890057486414,
+            "threshold_prob": 0.016264090177133657,
+            "inner_far": 0.0019071837253655435,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 171.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "threshold_raw": 0.015473429604281655,
+            "threshold_prob": 0.01818181818181818,
+            "inner_far": 0.001911436763300414,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 219.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "threshold_raw": 0.04909653784200158,
+            "threshold_prob": 0.375,
+            "inner_far": 0.0018642224638806897,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 323.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "threshold_raw": 0.00817376207953133,
+            "threshold_prob": 0.0790035587188612,
+            "inner_far": 0.0017555059048834983,
+            "far": 0.0,
+            "recall": 0.6923076923076923,
+            "precision": 1.0,
+            "lead_time_h": 116.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "threshold_raw": 0.014450793232369148,
+            "threshold_prob": 0.034482758620689655,
+            "inner_far": 0.001807426881367072,
+            "far": 0.0,
+            "recall": 0.0,
+            "precision": 0.0,
+            "lead_time_h": NaN
+          }
+        ],
+        "xgboost": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "threshold_raw": 0.3796340823173523,
+            "threshold_prob": 0.75,
+            "inner_far": 0.001709136109384711,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 324.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "threshold_raw": 0.08599933236837387,
+            "threshold_prob": 0.2857142857142857,
+            "inner_far": 0.001893939393939394,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 221.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "threshold_raw": 0.06585407257080078,
+            "threshold_prob": 0.08429394812680115,
+            "inner_far": 0.0019163206643244969,
+            "far": 0.001358695652173913,
+            "recall": 0.6863905325443787,
+            "precision": 0.9914529914529915,
+            "lead_time_h": 115.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "threshold_raw": 0.2982322871685028,
+            "threshold_prob": 0.7339449541284404,
+            "inner_far": 0.0017588743204349215,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 277.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "threshold_raw": 0.5857257843017578,
+            "threshold_prob": 0.7938144329896907,
+            "inner_far": 0.0018942383583267562,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 222.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "threshold_raw": 0.3607293367385864,
+            "threshold_prob": 0.021142713314875407,
+            "inner_far": 0.0019071837253655435,
+            "far": 0.0,
+            "recall": 0.2485207100591716,
+            "precision": 1.0,
+            "lead_time_h": 140.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "threshold_raw": 0.31626105308532715,
+            "threshold_prob": 0.7446808510638298,
+            "inner_far": 0.001911436763300414,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 217.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "threshold_raw": 0.13392364978790283,
+            "threshold_prob": 0.65625,
+            "inner_far": 0.0017088705918906323,
+            "far": 0.05169340463458111,
+            "recall": 1.0,
+            "precision": 0.9176136363636364,
+            "lead_time_h": 322.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "threshold_raw": 0.09587050974369049,
+            "threshold_prob": 0.1,
+            "inner_far": 0.001915097350781998,
+            "far": 0.0,
+            "recall": 0.6923076923076923,
+            "precision": 1.0,
+            "lead_time_h": 116.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "threshold_raw": 0.3112592399120331,
+            "threshold_prob": 0.6588235294117647,
+            "inner_far": 0.001643115346697338,
+            "far": 0.0,
+            "recall": 0.0,
+            "precision": 0.0,
+            "lead_time_h": NaN
+          }
+        ],
+        "lightgbm@rules_far": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "threshold_raw": 0.02731735396249761,
+            "threshold_prob": 0.25,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 323.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "threshold_raw": 0.9573625163620378,
+            "threshold_prob": 0.9303482587064676,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 217.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "threshold_raw": 0.011949690027424445,
+            "threshold_prob": 0.06839186691312385,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.6863905325443787,
+            "precision": 1.0,
+            "lead_time_h": 115.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "threshold_raw": 0.026965836168410615,
+            "threshold_prob": 0.02702702702702703,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 278.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "threshold_raw": 0.8881835498774483,
+            "threshold_prob": 0.9239766081871345,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 223.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "threshold_raw": 0.16925232721294783,
+            "threshold_prob": 0.016264090177133657,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.7514792899408284,
+            "precision": 1.0,
+            "lead_time_h": 165.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "threshold_raw": 0.04000787969533098,
+            "threshold_prob": 0.2,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 219.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "threshold_raw": 0.14746733057274974,
+            "threshold_prob": 0.8333333333333334,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 322.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "threshold_raw": 0.022742417763595882,
+            "threshold_prob": 0.0790035587188612,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.6923076923076923,
+            "precision": 1.0,
+            "lead_time_h": 116.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "threshold_raw": 0.042981200103252404,
+            "threshold_prob": 0.5,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.0,
+            "precision": 0.0,
+            "lead_time_h": NaN
+          }
+        ],
+        "xgboost@rules_far": [
+          {
+            "fold": 0,
+            "test_machine": "HPU_01",
+            "threshold_raw": 0.574884295463562,
+            "threshold_prob": 0.75,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 318.0
+          },
+          {
+            "fold": 1,
+            "test_machine": "HPU_02",
+            "threshold_raw": 0.9388738870620728,
+            "threshold_prob": 0.9329608938547486,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 212.0
+          },
+          {
+            "fold": 2,
+            "test_machine": "HPU_03",
+            "threshold_raw": 0.2873654365539551,
+            "threshold_prob": 0.6086956521739131,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.6863905325443787,
+            "precision": 1.0,
+            "lead_time_h": 115.0
+          },
+          {
+            "fold": 3,
+            "test_machine": "HPU_04",
+            "threshold_raw": 0.37852850556373596,
+            "threshold_prob": 0.7339449541284404,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 274.0
+          },
+          {
+            "fold": 4,
+            "test_machine": "HPU_05",
+            "threshold_raw": 0.8814581632614136,
+            "threshold_prob": 0.7938144329896907,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 210.0
+          },
+          {
+            "fold": 5,
+            "test_machine": "HPU_06",
+            "threshold_raw": 0.4359376132488251,
+            "threshold_prob": 0.021142713314875407,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.11834319526627218,
+            "precision": 1.0,
+            "lead_time_h": 139.0
+          },
+          {
+            "fold": 6,
+            "test_machine": "HPU_07",
+            "threshold_raw": 0.4757903218269348,
+            "threshold_prob": 0.875,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "lead_time_h": 217.0
+          },
+          {
+            "fold": 7,
+            "test_machine": "HPU_08",
+            "threshold_raw": 0.2539265751838684,
+            "threshold_prob": 0.8076923076923077,
+            "inner_far": 0.0,
+            "far": 0.03208556149732621,
+            "recall": 1.0,
+            "precision": 0.9472140762463344,
+            "lead_time_h": 322.0
+          },
+          {
+            "fold": 8,
+            "test_machine": "HPU_09",
+            "threshold_raw": 0.2444256991147995,
+            "threshold_prob": 0.6666666666666666,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.6923076923076923,
+            "precision": 1.0,
+            "lead_time_h": 116.0
+          },
+          {
+            "fold": 9,
+            "test_machine": "HPU_10",
+            "threshold_raw": 0.43402230739593506,
+            "threshold_prob": 0.8245614035087719,
+            "inner_far": 0.0,
+            "far": 0.0,
+            "recall": 0.0,
+            "precision": 0.0,
+            "lead_time_h": NaN
+          }
+        ]
+      },
+      "lead_times": {
+        "rules": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 111.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 198.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 111.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 284.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 283.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "failure_mode": "cylinder_drift",
+            "window_h": 192.0,
+            "lead_time_h": 123.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 201.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 205.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "failure_mode": "pump_wear",
+            "window_h": 288.0,
+            "lead_time_h": 242.0,
+            "detected": true
+          }
+        ],
+        "logreg": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 113.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 214.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 117.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 283.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 302.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "failure_mode": "cylinder_drift",
+            "window_h": 192.0,
+            "lead_time_h": 168.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 214.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 200.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "failure_mode": "pump_wear",
+            "window_h": 288.0,
+            "lead_time_h": 240.0,
+            "detected": true
+          }
+        ],
+        "lightgbm": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 116.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 223.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 115.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 323.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 325.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "failure_mode": "cylinder_drift",
+            "window_h": 192.0,
+            "lead_time_h": 171.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 218.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 219.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "failure_mode": "pump_wear",
+            "window_h": 288.0,
+            "lead_time_h": 278.0,
+            "detected": true
+          }
+        ],
+        "xgboost": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 116.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 222.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 115.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 322.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 324.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "failure_mode": "cylinder_drift",
+            "window_h": 192.0,
+            "lead_time_h": 140.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 221.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 217.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "failure_mode": "pump_wear",
+            "window_h": 288.0,
+            "lead_time_h": 277.0,
+            "detected": true
+          }
+        ],
+        "lightgbm@rules_far": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 116.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 223.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 115.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 322.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 323.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "failure_mode": "cylinder_drift",
+            "window_h": 192.0,
+            "lead_time_h": 165.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 217.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 219.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "failure_mode": "pump_wear",
+            "window_h": 288.0,
+            "lead_time_h": 278.0,
+            "detected": true
+          }
+        ],
+        "xgboost@rules_far": [
+          {
+            "event_id": "F_009",
+            "machine_id": "HPU_09",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 116.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_005",
+            "machine_id": "HPU_05",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 210.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_003",
+            "machine_id": "HPU_03",
+            "failure_mode": "contamination",
+            "window_h": 168.0,
+            "lead_time_h": 115.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_008",
+            "machine_id": "HPU_08",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 322.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_001",
+            "machine_id": "HPU_01",
+            "failure_mode": "pump_wear",
+            "window_h": 336.0,
+            "lead_time_h": 318.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_006",
+            "machine_id": "HPU_06",
+            "failure_mode": "cylinder_drift",
+            "window_h": 192.0,
+            "lead_time_h": 139.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_002",
+            "machine_id": "HPU_02",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 212.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_007",
+            "machine_id": "HPU_07",
+            "failure_mode": "valve_leakage",
+            "window_h": 240.0,
+            "lead_time_h": 217.0,
+            "detected": true
+          },
+          {
+            "event_id": "F_004",
+            "machine_id": "HPU_04",
+            "failure_mode": "pump_wear",
+            "window_h": 288.0,
+            "lead_time_h": 274.0,
+            "detected": true
+          }
+        ]
+      },
+      "far_sweep": {
+        "lightgbm": [
+          {
+            "target_far": 0.0,
+            "realised_far": 0.0,
+            "recall": 0.9309664694280079,
+            "precision": 1.0,
+            "events_detected": 9,
+            "lead_time_median_h": 222.0
+          },
+          {
+            "target_far": 0.001,
+            "realised_far": 0.0007144898542440697,
+            "recall": 0.9309664694280079,
+            "precision": 0.9975087194818136,
+            "events_detected": 9,
+            "lead_time_median_h": 224.0
+          },
+          {
+            "target_far": 0.002,
+            "realised_far": 0.0017147756501857674,
+            "recall": 0.9309664694280079,
+            "precision": 0.9940417080436942,
+            "events_detected": 9,
+            "lead_time_median_h": 224.0
+          },
+          {
+            "target_far": 0.005,
+            "realised_far": 0.004858531008859674,
+            "recall": 0.9309664694280079,
+            "precision": 0.9833496571988247,
+            "events_detected": 9,
+            "lead_time_median_h": 224.0
+          },
+          {
+            "target_far": 0.01,
+            "realised_far": 0.009717062017719349,
+            "recall": 0.9309664694280079,
+            "precision": 0.9673860911270983,
+            "events_detected": 9,
+            "lead_time_median_h": 224.0
+          },
+          {
+            "target_far": 0.02,
+            "realised_far": 0.01986281794798514,
+            "recall": 0.9329388560157791,
+            "precision": 0.9360919540229885,
+            "events_detected": 9,
+            "lead_time_median_h": 224.0
+          }
+        ],
+        "xgboost": [
+          {
+            "target_far": 0.0,
+            "realised_far": 0.0,
+            "recall": 0.8257725180802103,
+            "precision": 1.0,
+            "events_detected": 9,
+            "lead_time_median_h": 218.0
+          },
+          {
+            "target_far": 0.001,
+            "realised_far": 0.0008573878250928837,
+            "recall": 0.8389217619986851,
+            "precision": 0.9967532467532467,
+            "events_detected": 9,
+            "lead_time_median_h": 218.0
+          },
+          {
+            "target_far": 0.002,
+            "realised_far": 0.0017147756501857674,
+            "recall": 0.8731097961867192,
+            "precision": 0.9937205651491365,
+            "events_detected": 9,
+            "lead_time_median_h": 218.0
+          },
+          {
+            "target_far": 0.005,
+            "realised_far": 0.004858531008859674,
+            "recall": 0.9013806706114399,
+            "precision": 0.9828715365239294,
+            "events_detected": 9,
+            "lead_time_median_h": 221.0
+          },
+          {
+            "target_far": 0.01,
+            "realised_far": 0.009859959988568163,
+            "recall": 0.9191321499013807,
+            "precision": 0.96630859375,
+            "events_detected": 9,
+            "lead_time_median_h": 221.0
+          },
+          {
+            "target_far": 0.02,
+            "realised_far": 0.01986281794798514,
+            "recall": 0.9322813938198553,
+            "precision": 0.9351073762838469,
+            "events_detected": 9,
+            "lead_time_median_h": 223.0
+          }
+        ],
+        "logreg": [
+          {
+            "target_far": 0.0,
+            "realised_far": 0.0,
+            "recall": 0.8448389217619987,
+            "precision": 1.0,
+            "events_detected": 9,
+            "lead_time_median_h": 211.0
+          },
+          {
+            "target_far": 0.001,
+            "realised_far": 0.0008573878250928837,
+            "recall": 0.8579881656804734,
+            "precision": 0.9964809384164223,
+            "events_detected": 9,
+            "lead_time_median_h": 214.0
+          },
+          {
+            "target_far": 0.002,
+            "realised_far": 0.0017147756501857674,
+            "recall": 0.863905325443787,
+            "precision": 0.9931662870159453,
+            "events_detected": 9,
+            "lead_time_median_h": 214.0
+          },
+          {
+            "target_far": 0.005,
+            "realised_far": 0.004572735067162046,
+            "recall": 0.8678500986193294,
+            "precision": 0.9823008849557522,
+            "events_detected": 9,
+            "lead_time_median_h": 217.0
+          },
+          {
+            "target_far": 0.01,
+            "realised_far": 0.009859959988568163,
+            "recall": 0.8704799474030244,
+            "precision": 0.9633757961783439,
+            "events_detected": 9,
+            "lead_time_median_h": 219.0
+          },
+          {
+            "target_far": 0.02,
+            "realised_far": 0.01986281794798514,
+            "recall": 0.8809993425378041,
+            "precision": 0.9303607214428857,
+            "events_detected": 9,
+            "lead_time_median_h": 220.0
+          }
+        ]
+      },
+      "shap_top": {
+        "z_pressure_bar_mean_roll24h_std": 1.7888,
+        "fz_pressure_bar_mean": 0.5364,
+        "z_pressure_bar_mean_roll72h_std": 0.4558,
+        "z_pressure_bar_mean_roll72h_max": 0.2941,
+        "z_pressure_bar_mean_roll6h_std": 0.2708,
+        "z_pressure_bar_max": 0.2576,
+        "z_vibration_x_g_mean_roll72h_max": 0.2379,
+        "z_pressure_bar_mean_roll6h_max": 0.2227,
+        "z_pressure_bar_mean_roll24h_max": 0.2056,
+        "pct_pressure_minus_flow_mean_roll72h_std": 0.2019,
+        "pct_pressure_minus_flow_mean_roll24h_max": 0.1566,
+        "fz_temp_celsius_mean": 0.1529,
+        "vib_x_kurtosis_roll24h_min": 0.1452,
+        "z_pressure_bar_mean_lag1h": 0.1449,
+        "pct_pressure_minus_flow_mean_roll72h_min": 0.1273
+      },
+      "alert_example": {
+        "event_id": "F_001",
+        "machine_id": "HPU_01",
+        "timestamp": "2024-02-01 11:00:00",
+        "top_features": [
+          {
+            "feature": "z_pressure_bar_mean_roll24h_std",
+            "value": 0.2927,
+            "shap": 2.157
+          },
+          {
+            "feature": "fz_pressure_bar_mean",
+            "value": -0.7322,
+            "shap": 2.0839
+          },
+          {
+            "feature": "z_pressure_bar_mean_lag1h",
+            "value": -0.777,
+            "shap": 0.631
+          },
+          {
+            "feature": "pct_pressure_minus_flow_mean_roll72h_std",
+            "value": 0.3812,
+            "shap": -0.3014
+          },
+          {
+            "feature": "z_pressure_bar_mean_roll6h_std",
+            "value": 0.2483,
+            "shap": 0.2426
+          },
+          {
+            "feature": "z_pressure_bar_mean_roll6h_max",
+            "value": -0.0866,
+            "shap": 0.2316
+          },
+          {
+            "feature": "z_pressure_bar_mean_roll72h_std",
+            "value": 0.2283,
+            "shap": -0.2019
+          },
+          {
+            "feature": "z_pressure_bar_max",
+            "value": 2.2251,
+            "shap": -0.1787
+          },
+          {
+            "feature": "z_pressure_bar_mean_roll24h_max",
+            "value": 0.2436,
+            "shap": -0.1367
+          },
+          {
+            "feature": "z_vibration_x_g_mean_roll72h_mean",
+            "value": 0.3219,
+            "shap": -0.1321
+          }
+        ]
+      },
+      "registered": {
+        "name": "hpu-early-warning",
+        "version": 1,
+        "alias": "champion",
+        "model_uri": "models:/m-8f901141d76047c2a00d92b111fb8614"
+      }
+    }
+  },
+  "mlflow_parent_run_id": "3bf75f1ca15f42d48d9d240383965748",
+  "runtime_s": 596.3
+}
