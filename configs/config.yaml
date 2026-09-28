@@ -96,3 +96,54 @@ splits:
   time_holdout_start: '2024-02-15'      # optional secondary check: train before, test after
 
 random_state: 42
+
+# =============================================================================
+# Stage 3: model development and experiment tracking
+# =============================================================================
+modelling:
+  tracking:
+    # A database-backed store is needed for the Model Registry. Paths are relative to the project root.
+    tracking_uri: sqlite:///mlflow.db
+    artifact_dir: mlartifacts
+    experiment: hpu-stage3
+  classes: [healthy, pump_wear, valve_leakage, contamination, cylinder_drift]
+
+  # Hyperparameters are fixed, conservative defaults, not tuned. With 9 failure events, tuning on the
+  # LOMO score would overfit the evaluation itself (see notebook 03 §2).
+  models:
+    logreg:   {C: 0.05, max_iter: 2000}
+    ridge:    {alpha: 10.0}
+    lightgbm: {n_estimators: 300, learning_rate: 0.05, num_leaves: 15, min_child_samples: 40,
+               subsample: 0.8, subsample_freq: 1, colsample_bytree: 0.5, reg_lambda: 1.0}
+    xgboost:  {n_estimators: 300, learning_rate: 0.05, max_depth: 4, min_child_weight: 5,
+               subsample: 0.8, colsample_bytree: 0.5, reg_lambda: 1.0}
+
+  # EDA §8.3 rule-based detector, evaluated at hourly grain. Signal = trailing 6 h median of the hourly
+  # regime z-score (6 h mean of X−Y for divergence); an alarm needs 6 consecutive hours beyond threshold.
+  # Each rule is mapped to the failure mode whose EDA fingerprint it matches (first match wins).
+  # direction: +1 alarm above threshold, −1 below −threshold, 0 on the absolute value.
+  rule_baseline:
+    window_h: 6
+    persistence_h: 6
+    rules:
+      vibration_high: {signal: z_vibration_x_g_mean, direction: 1,  threshold: 3.0,  mode: contamination}
+      xy_divergence:  {signal: xy_delta_mean,        direction: 0,  threshold: 0.02, mode: cylinder_drift}
+      temp_high:      {signal: z_temp_celsius_mean,  direction: 1,  threshold: 3.0,  mode: valve_leakage}
+      pressure_low:   {signal: z_pressure_bar_mean,  direction: -1, threshold: 3.0,  mode: pump_wear}
+      flow_low:       {signal: z_flow_lpm_mean,      direction: -1, threshold: 3.0,  mode: valve_leakage}
+
+  rul:
+    # Asymmetric NASA (PHM08) score: d = predicted − true RUL in units of `unit_hours`.
+    # Late predictions (d > 0) cost exp(d / a_late) − 1, early ones exp(−d / a_early) − 1.
+    nasa_score: {unit_hours: 24, a_early: 13, a_late: 10}
+
+  early_warning:
+    calibration: isotonic          # fitted on inner leave-one-machine-out predictions, never on the test machine
+    # Operating point: the alarm threshold is chosen on the training machines so that at most this share
+    # of healthy (fail_within_h = 0) hours are in alarm. 0.002 ≈ one alarm-hour per ~3 weeks per machine.
+    target_false_alarm_rate: 0.002
+    persistence_h: 3               # an alarm needs this many consecutive hours above the threshold
+
+  registry:
+    alias: champion                # set only when a model beats every baseline on the task's primary metric
+    names: {failure_mode: hpu-failure-mode, rul: hpu-rul, early_warning: hpu-early-warning}
